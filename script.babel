@@ -1,0 +1,81 @@
+import * as React from "https://cdn.skypack.dev/react@17.0.1";
+import * as ReactDOM from "https://cdn.skypack.dev/react-dom@17.0.1";
+import { marked } from "https://cdn.skypack.dev/marked@4.0.18";
+
+const useState = React.useState;
+
+marked.setOptions({
+  breaks: true,
+  highlight: function (code) {
+    return;
+    Prism.highlight(code, Prism.languages.javascript, "javascript");
+  }
+});
+
+const renderer = new marked.Renderer();
+
+const firstInput =
+  "# H1\n" +
+  "## H2\n" +
+  "### H3\n" +
+  "Here's a [link](https://www.freecodecamp.org),n" +
+  "Heres some code, `<div></div>`, between 2 backticks.\n" +
+  "```\n" +
+  "// this is multi-line code:\n" +
+  "function anotherExample(firstLine, lastLine) {\n" +
+  "if (firstLine == '```' && lastLine == '```') {\n" +
+  "  return multiLineCode;\n" +
+  " }\n" +
+  "}\n" +
+  "```\n" +
+  "> Block Quotes!\n" +
+  "- And of course there are lists.\n" +
+  " - Some are bulleted.\n" +
+  "   - With different indentation levels.\n" +
+  "     - That look like this.\n" +
+  "1. And there are numbered lists too.\n" +
+  "1. Use just 1s if you want!\n" +
+  "1. And last but not least, let's not forget embedded images:\n" +
+  "**Here's a bold text** \n" +
+  "![React Logo](https://raw.githubusercontent.com/reactjs/reactjs.org/main/src/icons/logo.svg)  \n";
+
+const App = () => {
+  const [markdown, setMarkdown] = useState(firstInput);
+
+  const handleOnChange = (event) => {
+    setMarkdown(event.target.value);
+  };
+
+  return (
+    <div id="text-center">
+      <h1 id="header">Markdown Previewer</h1>
+      <div id="wrapper">
+        <div className="editor-wrap">
+          <div className="toolbar"> Editor</div>
+          <textarea
+            id="textarea"
+            cols="50"
+            rows="50"
+            id="editor"
+            value={markdown}
+            onChange={handleOnChange}
+            placeholder=""
+          >
+            {markdown}
+          </textarea>
+        </div>
+        <div className="preview-wrap">
+          <div className="toolbar"> Preview</div>
+          <div
+            id="preview"
+            dangerouslySetInnerHTML={{
+              __html: marked(markdown, { renderer: renderer })
+            }}
+          ></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));
