@@ -18,7 +18,7 @@ const firstInput =
   "# H1\n" +
   "## H2\n" +
   "### H3\n" +
-  "Here's a [link](https://www.freecodecamp.org),n" +
+  "Here's a [link](https://www.freecodecamp.org)\n\n" +
   "Heres some code, `<div></div>`, between 2 backticks.\n" +
   "```\n" +
   "// this is multi-line code:\n" +
@@ -35,7 +35,7 @@ const firstInput =
   "     - That look like this.\n" +
   "1. And there are numbered lists too.\n" +
   "1. Use just 1s if you want!\n" +
-  "1. And last but not least, let's not forget embedded images:\n" +
+  "1. And last but not least, let's not forget embedded images:\n\n" +
   "**Here's a bold text** \n" +
   "![React Logo](https://raw.githubusercontent.com/reactjs/reactjs.org/main/src/icons/logo.svg)  \n";
 
@@ -53,7 +53,6 @@ const App = () => {
         <div className="editor-wrap">
           <div className="toolbar"> Editor</div>
           <textarea
-            id="textarea"
             cols="50"
             rows="50"
             id="editor"
